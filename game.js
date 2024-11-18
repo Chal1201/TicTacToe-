@@ -11,7 +11,7 @@ let gameState = {
 
 // Poll the server for game state updates
 function fetchGameState() {
-    fetch('http://192.168.1.137:8000/gameState')  // Use the server's IP address
+    fetch('/gameState')  // Use the server's IP address
         .then(response => response.json())
         .then(state => {
             gameState = state;
@@ -23,7 +23,7 @@ function fetchGameState() {
 // Make a move and update the server
 function makeMove(index) {
     if (gameState.board[index] === "" && gameState.winner === null) {
-        fetch('http://192.168.1.137:8000/makeMove', {  // Use the server's IP address
+        fetch('/makeMove', {  // Use the server's IP address
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ index })
@@ -43,7 +43,7 @@ function makeMove(index) {
 
 // Reset the game (clear the board)
 function resetGame() {
-    fetch('http://192.168.1.137:8000/resetGame', {  // Send reset request to the server
+    fetch('/resetGame', {  // Send reset request to the server
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     })
